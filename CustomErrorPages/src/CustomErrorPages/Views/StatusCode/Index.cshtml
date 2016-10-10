@@ -1,5 +1,29 @@
 ﻿@model int
+
+@{
+    var statusCode = Model;
+    var statusmessage = "";
+    switch (statusCode)
+    {
+        case 400:
+            statusmessage = "Bad request: The request cannot be fulfilled due to bad syntax";
+            break;
+        case 403:
+            statusmessage = "Forbidden";
+            break;
+        case 404:
+            statusmessage = "Page not found";
+            break;
+        case 408:
+            statusmessage = "The server timed out waiting for the request";
+            break;
+        default:
+            statusmessage = "That’s odd... Something we didn't expect happened";
+            break;
+            //throw new HttpResponseMessage(HttpStatusCode.NotModified);
+    }
+}
 <div class="jumbotron">
     <h1>Error @Model</h1>
-    <h3>That’s odd... Something we didn't expect happened.</h3>
+    <h3>@statusmessage</h3>
 </div>
